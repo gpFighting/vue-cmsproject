@@ -39,6 +39,8 @@
 /*留出header的内边距*/
 	.app-container {
 		padding-top: 40px;
+		padding-bottom: 50px;
+		overflow: hidden;
 	}
 	.v-enter {
 		opacity: 0;

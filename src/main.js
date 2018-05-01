@@ -10,11 +10,17 @@ import router from './router.js'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
+
+import moment from 'moment'
+Vue.filter('dateFormat', function (dateStr, pattern='YYYY-MM--DD HH:mm:ss'){
+	 return moment(dateStr).format(pattern)
+})
 // 导入mint-ui 的相关模块
-import { Header, Swipe, SwipeItem } from 'mint-ui'
+import { Header, Swipe, SwipeItem, Button } from 'mint-ui'
 Vue.component(Header.name, Header)
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Button.name, Button);
 import './lib/Mui/css/mui.min.css' //导入mui样式表
 import './lib/Mui/css/icons-extra.css'  //导入购物车图标样式表
 
