@@ -1,3 +1,6 @@
+<!-- 这是评论组件 -->
+
+
 <template>
 	<div class="comment">
 		<h1>发表评论</h1>
@@ -31,24 +34,36 @@ import { Toast } from 'mint-ui'
 			this.getComments()
 		},
 		methods: {
+			// 组件一created就获取评论信息
 			getComments(){
 				this.$http.get('https://www.apiopen.top/satinApi?type=2&page='+this.page).then(result=>{
 					// console.log(result)
 					if (result.body.code==200) {
+						// 将前一页的数组与后一页合并
 						this.comments = this.comments.concat(result.body.data)
 					}else {
 						Toast('数据请求失败')
 					}
 				})
 			},
+			// 点击加载更多加载下一page的内容
 			loadmore(){
 				this.page +=1;
 				this.getComments();
 			},
+			// 点击评论，此处应该向服务器提交数据， 发送post请求，但是在此处我没做（第三方接口的问题）
 			add(){
-				var mythink = {text: this.mycomments, name: this.name}
-				this.comments.unshift(mythink)
-				this.mycomments=''
+				if (this.mycomments.trim().length == 0) {
+					return Toast('评论内容不能为空')
+				}
+				this.$http.post('https://www.apiopen.top/satinApi',{type: 2, text: '小生不才，未得姑娘青睐',name:'hahah'}).then(result=>{
+					if (result.body.code==200) {
+						var mythink = {text: this.mycomments, name: this.name}
+						this.comments.unshift(mythink)
+						this.mycomments=''
+					}
+				})
+				
 			}
 		}
 	}

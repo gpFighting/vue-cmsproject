@@ -1,3 +1,4 @@
+<!-- 新闻资讯列表 -->
 <template>
 	<div class="newslist">
 		<ul class="mui-table-view">
