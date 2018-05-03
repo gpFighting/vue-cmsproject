@@ -2,14 +2,14 @@
 <template>
 	<div class="newslist">
 		<ul class="mui-table-view">
-				<li class="mui-table-view-cell mui-media" v-for="(item,i) in newslist" :key="item.url">
-					<router-link :to="'/home/newslistContent/'+ i">
-						<img class="mui-media-object mui-pull-left" :src="item.pic">
+				<li class="mui-table-view-cell mui-media" v-for="(item,i) in newslist" :key="item.id">
+					<router-link :to="'/home/newslistContent/'+ item.id">
+						<img class="mui-media-object mui-pull-left" :src="item.img_url">
 						<div class="mui-media-body">
 							{{item.title}}
 							<p class='mui-ellipsis'>
-								<span>发表时间：{{item.time}}</span>
-								<span>点击：{{item.readnum}}次</span>
+								<span>发表时间：{{item.add_time | dateFormat}}</span>
+								<span>点击：{{item.click}}次</span>
 							</p>
 						</div>
 					</router-link>
@@ -31,11 +31,11 @@
 		},
 		methods: {
 			getNewslist(){
-				this.$http.jsonp('http://api.jisuapi.com/weixinarticle/get?channelid=2&start=0&num=20&appkey=524a5d62522d528a').then(result=>{
+				this.$http.get('api/getnewslist').then(result=>{
 					// console.log(result)
 					if (result.body.status == 0) {
-						result = result.body.result.list;
-						this.newslist = result;
+						this.newslist = result.body.message;
+						
 					}else {
 						Toast('获取数据失败')
 					}

@@ -3,13 +3,13 @@
 	<div class="news-content">
 		<h1>{{result.title}}</h1>
 		<p>
-			<span>发表时间：{{result.time}}</span>
-			<span>点击：{{result.readnum}}次</span>
+			<span>发表时间：{{result.add_time | dateFormat}}</span>
+			<span>点击：{{result.click}}次</span>
 		</p>
 		<hr>
 		<div v-html="result.content" class="newscontainer">		
 		</div>
-		<comment></comment>
+		<comment :cmtid="id"></comment>
 	</div>
 </template>
 
@@ -27,11 +27,10 @@ import comment from '../subcom/comment.vue'
 		},
 		methods: {
 			getNewsContent(){
-				this.$http.jsonp('http://api.jisuapi.com/weixinarticle/get?channelid=2&start=0&num=20&appkey=524a5d62522d528a').then(result=>{
+				this.$http.get('api/getnew/'+this.id).then(result=>{
+					// console.log(result)
 					if (result.body.status==0) {
-						result = result.body.result.list[this.id]
-						this.result = result;
-						
+						this.result = result.body.message[0]											
 					}
 				})
 			
@@ -43,21 +42,27 @@ import comment from '../subcom/comment.vue'
 	}
 </script>
 
-<style type="text/css" lang="less" scoped>
+<style type="text/css" lang="less" >
+	
 	.news-content {
-		h1 {
+		padding: 5px;
+		>h1 {
 			font-size: 16px;
 			color: red;
 			text-align: center;
 			margin: 10px 0;
 		}
-		p {
+		>p {
 			font-size: 13px;
 			color: #21A5E7;
 			display: flex;
 			justify-content: space-between;
 			padding: 0 5px;
 		}
-		
+		.newscontainer {
+			img {
+				width: 100%;
+			}
+		}
 	}
 </style>

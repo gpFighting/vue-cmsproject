@@ -21,7 +21,7 @@
 				<span class="mui-tab-label">会员</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/shopcar">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">0</span></span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge" id="badge">0</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/search">
@@ -36,6 +36,9 @@
 
 </script>
 <style type="text/css" scoped>
+	/* * {
+		touch-action: pan-y;
+	} */
 /*留出header的内边距*/
 	.app-container {
 		padding-top: 40px;
@@ -55,4 +58,5 @@
 	.v-leave-active {
 		transition: all 0.5s ease;
 	}
+	
 </style>

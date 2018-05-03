@@ -1,10 +1,7 @@
 <template>
 	<div>
-		<mt-swipe :auto="3000">
-		  <mt-swipe-item v-for="item in lunbolist" :key="item.url">
-		  	<img :src="item.pic" alt="">
-		  </mt-swipe-item>
-		</mt-swipe>
+		
+		<swipe :lunbolist="lunbolist" :flag="true"></swipe>
 		<ul class="mui-table-view mui-grid-view mui-grid-9">
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/newslist">
                     <img src="../../images/menu1.png">
@@ -12,7 +9,7 @@
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/photoList">
                     <img src="../../images/menu2.png">
                     <div class="mui-media-body">图片分享</div></router-link></li>
-            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="#">
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/goodslist">
                     <img src="../../images/menu3.png">
                     <div class="mui-media-body">商品购买</div></router-link></li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="#">
@@ -31,6 +28,8 @@
 <script>
 // 导入Toast组件
 	import { Toast } from 'mint-ui'
+	//导入轮播图组件
+	import swipe from '../swipe/swipe.vue'
 	export default {
 		data(){
 			return{
@@ -42,43 +41,26 @@
 		},
 		methods: {
 			getLunbo(){
-				this.$http.jsonp('http://api.jisuapi.com/xiaohua/pic?pagenum=1&pagesize=3&sort=addtime&appkey=524a5d62522d528a').then(result=>{
-					// result = result.body.result.list
+				this.$http.get('api/getlunbo').then(result=>{
 					// console.log(result)
 					if (result.body.status == 0) {
-						this.lunbolist = result.body.result.list
+						this.lunbolist = result.body.message
 					}else {
 						Toast('轮播图数据获取失败')
 					}
 				})
 
 			}
+		},
+		components: {
+			swipe
 		}
 	}
 </script>
 
 
 <style type="text/css" lang="less" scoped>
-	.mint-swipe {
-		height: 200px;
-		.mint-swipe-item {
-			width: 100%;
-			height: 100%;
-			&:nth-child(1) {
-				background-color: red;
-			}
-			&:nth-child(2) {
-				background-color: blue;
-			}
-			&:nth-child(3) {
-				background-color: orange;
-			}
-			img {
-				width: 100%;
-				height: 100%;
-			}
-		}
-	}
+	
 	.mui-grid-view.mui-grid-9 {
 		background-color: #fff;
 		border: none;
