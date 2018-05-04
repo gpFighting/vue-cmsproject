@@ -7,7 +7,7 @@
 		@enter= "enter"
 		@after-enter = "afterEnter"
 		>
-			<div class="ball" v-show="flag"></div>
+			<div class="ball" v-show="isshow" ref="ball"></div>
 		</transition>
 		<div class="mui-card">
 			<div class="mui-card-content">
@@ -27,7 +27,7 @@
 							<numbox @getcount="getbuycount" :maxcount="info.stock_quantity"></numbox>
 						</div>
 						<mt-button type="primary" size="small">立即购买</mt-button>
-						<mt-button type="danger" size="small" @click.native="addToShopcar">加入购物车</mt-button>
+						<mt-button type="danger" size="small" @click="addToShopcar">加入购物车</mt-button>
 					</div>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 				id: this.$route.params.id, //路由地址中唯一的id
 				lunbolist: [],
 				info: {},
-				flag: false,
+				isshow: false,
 				buynum: 1
 			}
 		},
@@ -95,7 +95,9 @@
 				this.$router.push({name: "getcomments", params: {id}})
 			},
 			addToShopcar(){
-				this.flag = !this.flag
+				this.isshow = !this.isshow;
+				console.log(this.isshow)
+				this.$store.commit('storedata',{id: this.id, count: this.buynum,price: this.info.sell_price,flag: true})
 			},
 			// 小球执行半场动画  用钩子函数
 			beforeEnter(el){
@@ -103,21 +105,22 @@
 			},
 			enter(el,done){
 				// element.getBoundingClientRect() 原生DOM方法  获取元素相对于视窗的位置  有left  right top bottom 四个值 均是相对于元素左上角
-				const ballposition = el.getBoundingClientRect() //获取小球相对于视口的位置
-				const badgeposition = document.getElementById('badge').getBoundingClientRect()  //获取徽章相对于视口的位置
-				const x = badgeposition.left - ballposition.left
-				const y = badgeposition.top - ballposition.top
 				el.offsetWidth;
+				var ballposition = this.$refs.ball.getBoundingClientRect(); //获取小球相对于视口的位置
+				var badgeposition = document.getElementById('badge').getBoundingClientRect();  //获取徽章相对于视口的位置
+				var x = badgeposition.left - ballposition.left;
+				var y = badgeposition.top - ballposition.top;
+				
 				el.style.transform = `translate(${x}px, ${y}px)`   //当有页面滚动  或在不同分辨率的设备上时小球的运动轨迹就会出错，此处不应该把运动的距离写死  应该动态变化
-				el.style.transition = 'all 0.5s cubic-bezier(.4,-0.3,1,.68)'
+				el.style.transition = 'all 0.5s cubic-bezier(.4,-0.3,1,.68)';
 				done()
 			},
 			afterEnter(el){
-				this.flag = !this.flag
+				this.isshow = !this.isshow
 			},
 			// 购买数量选择框子组件的值通过emit传给父组件
 			getbuycount(count){
-				this.buynum = count
+				this.buynum = parseInt(count)
 				// console.log(this.buynum)
 			}
 		},
@@ -128,7 +131,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.goodsinfo {
 		background-color: #ddd;
 		overflow: hidden;
@@ -157,7 +160,7 @@
 			position: absolute;
 			top: 384px;
 			left: 151px;
-			z-index: 99;
+			z-index: 999;
 		}
 	}
 </style>

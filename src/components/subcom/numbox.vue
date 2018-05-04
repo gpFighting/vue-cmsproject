@@ -9,12 +9,16 @@
 
 <script>
 import mui from '../../lib/Mui/js/mui.min.js'  //此处导入mui的js文件 webpack默认js是严格默认，可能会出现错误，所以需安装babel-plugin-transform-remove-strict-mode 取消严格模式插件
+// mui('body').on('click','a',function(){document.location.href=this.href;});
+// mui('body').on('tap','a',function(){
+//     window.top.location.href=this.href;
+// });
 	export default {
 		mounted(){
 			mui('.mui-numbox').numbox()
 		},
 		created(){
-				console.log(this.maxcount)           /*此处输出undefined?  原因在于商品的库存数量是异步请求得来的 当numbox组件一被创建的时候  数据还没有请求回来 所以是undefined, 那此处怎么设定数量的最大值为库存数呢 我们并不知道库存数量异步请求何时返回数据了------可以用watch 来监听 maxcount 值的改变 总会返回数据的*/
+				/*console.log(this.maxcount)*/           /*此处输出undefined?  原因在于商品的库存数量是异步请求得来的 当numbox组件一被创建的时候  数据还没有请求回来 所以是undefined, 那此处怎么设定数量的最大值为库存数呢 我们并不知道库存数量异步请求何时返回数据了------可以用watch 来监听 maxcount 值的改变 总会返回数据的*/
 			},
 		methods: {			
 			selectcount(){

@@ -10,7 +10,7 @@
 
 		<hr>
 
-		<vue-preview :slides="slide1" @close="handleClose" height="100"></vue-preview>
+		<vue-preview :slides="slide1" @close="handleClose" height="100" ></vue-preview>
 		<div v-html="data.content" class="photoinfo-des"></div>
 		<comment :cmtid="id"></comment>
 
@@ -56,6 +56,7 @@
 				})
 			},
 			handleClose(){}
+
 		},
 		components: {
 			comment
