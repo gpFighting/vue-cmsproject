@@ -96,7 +96,7 @@
 			},
 			addToShopcar(){
 				this.isshow = !this.isshow;
-				console.log(this.isshow)
+				// console.log(this.isshow)
 				this.$store.commit('storedata',{id: this.id, count: this.buynum,price: this.info.sell_price,flag: true})
 			},
 			// 小球执行半场动画  用钩子函数

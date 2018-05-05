@@ -23,7 +23,7 @@ import mui from '../../lib/Mui/js/mui.min.js'  //此处导入mui的js文件 webp
 			}
 		},
 		props: ['maxcount'],
-		watch: {
+		watch: {                    //监听maxcount值的改变，当请求一返回maxcount的值，就将选择框的最大值设为该值
 			maxcount: function (newVal, oldVal){
 				mui('.mui-numbox').numbox().setOption('max',newVal)
 			}

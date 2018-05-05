@@ -1,5 +1,5 @@
 <template>
-	<div class="mui-numbox" data-numbox-min='1'>  <!-- :data-numbox-max='maxcount'此处最大数量应该改为商品的库存数量 涉及父组件向子组件传值 -->
+	<div class="mui-numbox" data-numbox-min='1'>  
 		<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
 		<!-- 当选择框的数量一改变 change事件 就将这个值传给父组件 -->
 		<input id="test" class="mui-input-numbox" type="number" :value="goodsnum" ref="numsel" @change="addorcan" readonly/>
