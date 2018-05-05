@@ -16,19 +16,19 @@
 		<!-- 这是Tabbar 区域 -->
 		<!-- 使用mui -->
 		<nav class="mui-bar mui-bar-tab navbar">
-			<router-link class="mui-tab-item " to="/home"  tag="div">
+			<router-link class="mui-tab-item " to="/home">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</router-link>
-			<router-link class="mui-tab-item" to="/member" tag="div">
+			<router-link class="mui-tab-item" to="/member">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">会员</span>
 			</router-link>
-			<router-link class="mui-tab-item" to="/shopcar" tag="div">
+			<router-link class="mui-tab-item" to="/shopcar">
 				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge" id="badge">{{$store.getters.tocalmount}}</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
-			<router-link class="mui-tab-item" to="/search" tag="div">
+			<router-link class="mui-tab-item" to="/search">
 				<span class="mui-icon mui-icon-search"></span>
 				<span class="mui-tab-label">搜索</span>
 			</router-link>
@@ -37,11 +37,17 @@
 </template>
 
 <script type="text/javascript">
+import mui from './lib/Mui/js/mui.min.js'
 	export default {
 		data(){
 			return {
 				flag: false
 			}
+		},
+		mounted(){       //解决导航栏 中 router-link 点击不能跳转的问题  mui 默认阻止了a链接的跳转 此处通过事件委托的方式给nav 下的 a 绑定tap事件 触发跳转  必须在 生命周期函数 mounted中
+			mui('.mui-bar-tab').on('tap','a',function(){
+　　　　　　	window.top.location.href=this.href;
+　　　　　　})
 		},
 		created(){                          //页面一加载进行判断
 			this.flag = this.$route.path === '/home' ? false : true

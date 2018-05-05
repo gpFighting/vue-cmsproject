@@ -9,10 +9,7 @@
 
 <script>
 import mui from '../../lib/Mui/js/mui.min.js'  //此处导入mui的js文件 webpack默认js是严格默认，可能会出现错误，所以需安装babel-plugin-transform-remove-strict-mode 取消严格模式插件
-// mui('body').on('click','a',function(){document.location.href=this.href;});
-// mui('body').on('tap','a',function(){
-//     window.top.location.href=this.href;
-// });
+
 	export default {
 		mounted(){
 			mui('.mui-numbox').numbox()
