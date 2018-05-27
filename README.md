@@ -2,7 +2,7 @@
 ##  这是一个牛逼的项目 牛不牛逼用心去感受
 ### 感受每一行代码中的诗琴雅意
 #### 妹的，遍布下去了 就这样吧
-
+##使用到的技术栈： webpack  vue  vue-router  mint-ui  mui  vue-preview  vuex  vue-resource
 #项目实现步骤及总结
 ## webpack 基本配置 项目结构搭建
 ## 项目主体结构 app.vue

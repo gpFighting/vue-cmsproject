@@ -16,7 +16,7 @@ Vue.use(Vuex)
 // 在每次页面刷新时 从本地存储中拿取car 的数据
 var car = JSON.parse(localStorage.getItem('car') || '[]')
 
-localStorage.getItem('car')
+// localStorage.getItem('car')
 const store = new Vuex.Store({
 	state: {
 		car: car            //购物车中的所有数据

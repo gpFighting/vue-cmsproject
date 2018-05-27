@@ -1,4 +1,5 @@
 <!-- 每项新闻资讯列表的详细信息 -->
+
 <template>
 	<div class="news-content">
 		<h1>{{result.title}}</h1>
